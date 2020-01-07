@@ -39,7 +39,7 @@ for t=1:nt
         
     end
     if mod(t,2^15)==0
-        save(['results/siechwm' num2str(t) 't' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps')
+        save(['../results/siechwm' num2str(t) 't' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps')
     end
 end
 toc;
