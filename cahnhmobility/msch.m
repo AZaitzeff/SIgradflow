@@ -1,15 +1,18 @@
 %nt=2^24;
 N=2048;
-nt=2^10;
-order=3;
-T=20*8;
-eps=1;
-[U,X,Y,h]=initializebigoval(N,eps);
-Uinit=U;
-dt=T/nt;
 mob=@(u) u.*(1-u)+1/16;
 sqrtmob=@(u) sqrt(u.*(1-u)+1/16);
 A=5/32;
+T=20*8;
+eps=1;
+order=3;
+nts=[2^11,2^12,2^13,2^14];
+for nt=nts
+
+[U,X,Y,h]=initializebigoval(N,eps);
+Uinit=U;
+dt=T/nt;
+
 
 
 
@@ -45,3 +48,4 @@ for t=1:nt
 end
 toc;
 save(['../results/mschwm' num2str(order) 'order' num2str(nt) 'nt' num2str(N) 'N'],'T','dt','N','U','eps')
+end
