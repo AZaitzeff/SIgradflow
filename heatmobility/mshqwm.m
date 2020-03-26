@@ -1,9 +1,8 @@
-%nt=2^24;
-%N=2048;
-N=512;
+
+N=2048;
 T=1/50;
-order=3;
-nts=[2^6,2^7,2^8,2^9,2^10];
+order=2;
+nts=[2^3,2^4,2^5,2^6,2^7,2^8];
 %nts=[2^11,2^12,2^13];
 A=1;
 numofts=size(nts,2);
@@ -26,8 +25,9 @@ if order==2
     load('../si2nd.mat')
     
 else
-    g2=load('../si2nd.mat');
-    load('../si3rd.mat')
+    si1=load('../scheme1si.mat');
+    si1125=load('../scheme1125si.mat');
+    si3order=load('../si3rd.mat');
     
 end
 
@@ -42,17 +42,23 @@ for t=1:nt
         MU=mob(Us);
         [U]=singlemshqwm(U,gamma,theta,m,MU,dt,N,h,A);
     elseif order==3
-        MU1=mob(U);
-        [Us1]=singlemshqwm(U,[[1]],[[1]],1,MU1,dt/3,N,h,A);
-        MU2=mob(Us1);
-        [Us2]=singlemshqwm(U,g2.gamma,g2.theta,g2.m,MU2,dt*2/3,N,h,A);
-        MU3=mob(U)*1/4+mob(Us2)*3/4;
-        [U]=singlemshqwm(U,gamma,theta,m,MU3,dt,N,h,A);
+        MUn=mob(U);
+        
+        [U1h]=singlemshqwm(U,si1.gamma,si1.theta,si1.m,MUn,dt/6,N,h,A);
+        MU1h=mob(U1h);
+        
+        [U2h1s]=singlemshqwm(U,[[1]],[[1]],1,MUn,2*dt/5,N,h,A);
+        MU2h1s=mob(U2h1s);
+        [U2h]=singlemshqwm(U,si1125.gamma,si1125.theta,si1125.m,MU2h1s,dt*5/6,N,h,A);
+        MU2h=mob(U2h);
+        
+        [U1]=singlemshqwm(U,si3order.gamma,si3order.theta,si3order.m,MU1h,dt/2,N,h,A);
+        [U]=singlemshqwm(U1,si3order.gamma,si3order.theta,si3order.m,MU2h,dt/2,N,h,A);
     end
     
 end
 toc;
-error1(1,iter)=sqrt(sum((U-trueU).^2));
+error1(1,iter)=sqrt(h*sum((U-trueU).^2));
 end
 
 for i=2:numofts
