@@ -1,12 +1,12 @@
-nt=2^24;
-N=2048;
-%nt=2^19;
-%N=ceil(sqrt(2)*1024);
-%nt=2^20;
+nt=2^23;
+%N=1024;
+% %nt=2^19;
+N=ceil(sqrt(2)*1024);
+% %nt=2^20;
 %N=2048;
 T=20;
 eps=1;
-[U,X,Y,h]=initializebigoval(N,eps);
+[U,~,~,h]=initializebigoval(N,eps);
 Uinit=U;
 dt=T/nt;
 [l,k]=meshgrid(0:(N-1));
@@ -29,10 +29,10 @@ for t=1:nt
         Fbar=fft2(F);
         Ubar=(Fbar./(invmatrix1))./(invmatrix2);
         U=real(ifft2(Ubar));
-        
     end
-    
-    
+    if mod(t,2^22)==0
+        save(['results/siech' num2str(nt) 'N' num2str(N) 't' num2str(t)],'T','dt','N','U','Upre','eps','t');
+    end
 end
 toc;
-save(['results/siech' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps')
+save(['results/siech' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps');

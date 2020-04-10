@@ -1,8 +1,8 @@
 
-nt=2^22;
-N=4096;
-%nt=2^18;
-%N=2048;
+%nt=2^22;
+%N=4096;
+nt=2^20;
+N=2048;
 T=20;
 eps=1;
 [U,X,Y,h]=initializebigcircle(N,eps);

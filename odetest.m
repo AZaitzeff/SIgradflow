@@ -1,6 +1,6 @@
 %addpath('../findgamma/')
 %[gamma,m]=getgamma(3,0);
-
+load('si3rd.mat')
 T=2;
 trueval=2*atan(exp(-T));
 Ns=[16,32,64,128,256,512,1024,2048,4096];
