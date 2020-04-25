@@ -1,5 +1,5 @@
 function L=laplacian9wM(U,N,h,M)
-
+    %L=dx(U,N,h)+dy(U,N,h);
     %L=bdx(fdx(U,N,h).*M,N,h)+bdy(fdy(U,N,h).*M,N,h);
     L=dx(dx(U,N,h).*M,N,h)+dy(dy(U,N,h).*M,N,h);
     %L=dx(U,N,h).*dx(M,N,h)+dy(U,N,h).*dy(M,N,h)+laplacian9(U,N,h).*M;

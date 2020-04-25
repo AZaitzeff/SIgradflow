@@ -1,7 +1,7 @@
 
-N=2048;
-T=1/50;
-order=2;
+N=8192*2+1;
+T=1/10;
+order=3;
 nts=[2^3,2^4,2^5,2^6,2^7,2^8];
 %nts=[2^11,2^12,2^13];
 A=1;
@@ -11,10 +11,9 @@ error1=zeros(2,numofts);
 [U,x,h]=initializesin(N);
 Uinit=U;
 mob=@(U) U;
-trueU=sin(2*pi*x)*exp(-T*(4*pi^2))+2;
+trueU=cos(pi*x)*exp(-T*(pi^2))+2;
 for iter=1:numofts
 nt=nts(iter);
-[u,x,h]=initializesin(N);
 U=Uinit;
 dt=T/nt;
 

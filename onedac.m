@@ -1,7 +1,7 @@
-%load('si2nd.mat')
-load('si3rd.mat')
+load('si2nd.mat')
+%load('si3rd.mat')
 m=size(gamma,1);
-fac=5;
+fac=0;
 
 n=2^13+1;
 h=20/(n-1);
@@ -11,8 +11,8 @@ c=2;
 T=5;
 uinit=tanh((x+5)/eps);
 trueu=tanh(((x+5)-c*T)/eps);
-nts=[floor(702/m)];%,2^14,2^15];
-%nts=[2^12,2^13,2^14,2^15,2^16];
+%nts=[floor(702/m)];%,2^14,2^15];
+nts=[2^9,2^10,2^11,2^12,2^13];
 N=numel(nts);
 error1=zeros(2,N);
 

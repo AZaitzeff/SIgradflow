@@ -1,5 +1,4 @@
-function [UN1]=linearsolvefft(U0,MU,f,S,dt,eps,N,h,C)
-tol=1e-10;
+function [UN1]=linearsolvefft(U0,MU,f,S,dt,eps,N,h,C,tol)
 maxiter=3000;
 [l,k]=meshgrid(0:(N-1));
 
@@ -8,13 +7,12 @@ invmatrix2=sqrt(S)-1j*sqrt(C*dt*eps)/(h^2)*(-5+8/3*cos(2*pi*l/N)+8/3*cos(2*pi*k/
 UN=U0;
 
 for iter=1:maxiter
-    RHS=f-dt*laplacian9wM(eps*laplacian9(UN,N,h)+UN,N,h,MU)+dt*C*eps*laplacian9(laplacian9(UN,N,h),N,h);
+    RHS=f-dt*laplacian9wM(eps*laplacian9(UN,N,h),N,h,MU)+dt*C*eps*laplacian9(laplacian9(UN,N,h),N,h);
     RHSbar=fft2(RHS);
     Ubar=(RHSbar./(invmatrix1))./(invmatrix2);
     UN1=real(ifft2(Ubar));
-    if max(abs(UN1-UN))<tol
+    if max(abs(UN1(:)-UN(:)))<tol
         break
     end
     UN=UN1;
 end
-iter

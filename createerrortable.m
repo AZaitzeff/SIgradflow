@@ -1,10 +1,10 @@
 %nt=1024*2^6;
-vars=load(['results/si2ac262144N2048']);
+vars=load(['results/si2ac1048576N2048']);
 trueU=vars.U;
 N=2048;
 [~,trueX,trueY,h]=initializebigcircle(N,1);
 %[~,r,~]=initializebigcirclepolar(4096,eps);
-nts=2.^(10:14);
+nts=2.^(12:16);
 n=numel(nts);
 error1=zeros(2,n);
 for numt=1:n
