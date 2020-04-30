@@ -47,7 +47,7 @@ for t=1:nt
         [U1h]=singlemsch(U,si1.gamma,si1.theta,si1.m,MUn,dt/6,eps,N,h);
         MU1h=mob(U1h);
         w1=laplacian5wM(laplacian5(eps*U1h,N,h)-Wp(U1h),N,h,MU1h);
-        fullMU1h=MU1h-1/72*k^2*mobpp(U1h).*w1.^2;
+        fullMU1h=MU1h-1/72*dt^2*mobpp(U1h).*w1.^2;
         
         [U2h1s]=singlemsch(U,[[1]],[[1]],1,MUn,2*dt/5,eps,N,h);
         MU2h1s=mob(U2h1s);
@@ -56,7 +56,7 @@ for t=1:nt
         [U2h]=singlemsch(U,si1125.gamma,si1125.theta,si1125.m,MU2h1s,dt*5/6,eps,N,h);
         MU2h=mob(U2h);
         w2=laplacian5wM(laplacian5(eps*U2h,N,h)-Wp(U2h),N,h,MU2h);
-        fullMU2h=MU2h-1/72*k^2*mobpp(U2h).*w2.^2;
+        fullMU2h=MU2h-1/72*dt^2*mobpp(U2h).*w2.^2;
         
         
         [U1]=singlemsch(U,si3order.gamma,si3order.theta,si3order.m,fullMU1h,dt/2,eps,N,h);
