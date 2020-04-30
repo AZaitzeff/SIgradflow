@@ -2,11 +2,13 @@
 Ns=[1024,1024,1024,1024,1024,1024];
 eps=0.0025;
 mob=@(u) (1-sqrt(eps))*(1-u.^2).^2+sqrt(eps);
+mobpp=@(u) -4*(1-sqrt(eps))*(1-3*u.^2);
+Wp=@(u) (u.^2-1).*u;
 T=1/2;
 
 
 angle=pi/4;
-order=2;
+order=3;
 nts=[2^4,2^5,2^6,2^7,2^8,2^9];
 n=numel(nts);
 for i=1:n
@@ -44,14 +46,21 @@ for t=1:nt
         
         [U1h]=singlemsch(U,si1.gamma,si1.theta,si1.m,MUn,dt/6,eps,N,h);
         MU1h=mob(U1h);
+        w1=laplacian5wM(laplacian5(eps*U1h,N,h)-Wp(U1h),N,h,MU1h);
+        fullMU1h=MU1h-1/72*mobpp(U1h).*w1.^2;
         
         [U2h1s]=singlemsch(U,[[1]],[[1]],1,MUn,2*dt/5,eps,N,h);
         MU2h1s=mob(U2h1s);
+        
+        
         [U2h]=singlemsch(U,si1125.gamma,si1125.theta,si1125.m,MU2h1s,dt*5/6,eps,N,h);
         MU2h=mob(U2h);
+        w2=laplacian5wM(laplacian5(eps*U2h,N,h)-Wp(U2h),N,h,MU2h);
+        fullMU2h=MU2h-1/72*mobpp(U2h).*w2.^2;
         
-        [U1]=singlemsch(U,si3order.gamma,si3order.theta,si3order.m,MU1h,dt/2,eps,N,h);
-        [U]=singlemsch(U1,si3order.gamma,si3order.theta,si3order.m,MU2h,dt/2,eps,N,h);
+        
+        [U1]=singlemsch(U,si3order.gamma,si3order.theta,si3order.m,fullMU1h,dt/2,eps,N,h);
+        [U]=singlemsch(U1,si3order.gamma,si3order.theta,si3order.m,fullMU2h,dt/2,eps,N,h);
     end
     
 end

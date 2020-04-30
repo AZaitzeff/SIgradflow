@@ -14,14 +14,8 @@ for i=1:maxiter
     RHS=f-sqrt(S*dt*eps)*laplacian5wM(U,N,h,MU)-sqrt(S*dt*eps)*laplacian5(U,N,h);
     %[x,flag,~,iter]=pcg(A,RHS(:),tol1/10,100,L,L',U(:));
     [x,iter]=zpcg(UB(:),A,RHS(:),tol1,100,L);
+    %[x,iter]=zcg(UB(:),A,RHS(:),tol1,100);
     totiter=totiter+iter;
-    %max(abs(x-z))
-%     if flag>0
-%       flag
-%       N
-%       dt
-%       'warning' 
-%     end
     UB=reshape(x, [N,N]);
     UM1=real(ifft2(fft2(UB)./B));
     U=UM1;
@@ -31,4 +25,4 @@ for i=1:maxiter
     end
     tol1=val*.9;
 end
-%semilogy(fill)
+%totiter
