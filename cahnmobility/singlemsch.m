@@ -1,6 +1,6 @@
 function [UF,RHS]=singlemsch(U0,gamma,theta,m,MU,dt,eps,N,h)
 %A2=operatormatrixpart(MU,N,dt,eps,h);
-tol1=1e-8;
+tol1=1e-6;
 E2=@(U) dt*laplacian5wM((U.^2-1).*U,N,h,MU);
 Uall=zeros(m,N,N);
 UF=U0;
