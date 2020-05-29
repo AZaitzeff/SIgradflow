@@ -60,4 +60,4 @@ for t=1:nt
     end
 end
 toc;
-%save(['../results/siechwm' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps','X','Y','h')
+save(['../results/siechwm' num2str(nt) 'N' num2str(N)],'T','dt','N','U','eps','X','Y','h')
