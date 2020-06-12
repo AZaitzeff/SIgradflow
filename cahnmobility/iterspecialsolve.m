@@ -28,3 +28,7 @@ for i=1:maxiter
     %val
     tol1=val*.75;
 end
+if i==maxiter
+   N
+   'warning'
+end
