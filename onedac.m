@@ -1,5 +1,8 @@
-load('si2nd.mat')
-%load('si3rd.mat')
+if order==2
+    load('si2nd.mat')
+else order==3
+    load('si3rd.mat')
+end
 m=size(gamma,1);
 fac=0;
 

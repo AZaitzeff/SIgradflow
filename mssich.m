@@ -1,13 +1,17 @@
 
-load('si3rd.mat')
+if order==2
+    load('si2nd.mat')
+else order==3
+    load('si3rd.mat')
+end
 T=20;
-fac=0;%keep at zero, non zero not implimneted yet.
+fac=0;
 eps=1;
 order=3;
-nts=2.^(6:9);
+nts=2.^(7:11);
 
 
-for numt=1:4
+for numt=1:5
     N=2048;
     [l,k]=meshgrid(0:(N-1));
     Uall=zeros(m+1,N,N);

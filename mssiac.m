@@ -1,15 +1,19 @@
 
-load('si3rd.mat')
+if order==2
+    load('si2nd.mat')
+else order==3
+    load('si3rd.mat')
+end
 fac=0;
 T=20;
 order=3;
 eps=1;
 
-nts=2.^(7:9);
+nts=2.^(8:12);
 
  
 
-for numt=1:3
+for numt=1:5
 
     %N=ceil(512*2^((numt-2)/2));
     N=2048;
