@@ -12,5 +12,7 @@ The coefficient are found at:
 (4.5) scheme1si.mat  
 (4.6) scheme1125si.mat  
 
-(A.2) getgamma(2,1)
+(A.2) getgamma(2,0)
+(A.3) getgamma(3,0)
+(A.4) getgamma(2,1)
 
